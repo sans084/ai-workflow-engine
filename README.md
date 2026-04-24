@@ -31,37 +31,40 @@ A full-stack AI-powered request intake and triage system built with Next.js 14, 
 | Deployment | Vercel (frontend) + Render (backend) |
 
 ## Project Structure
+
 ```
 ai-workflow-engine/
-├── client/                         ← Next.js 14 App
+├── client/                          ← Next.js 14 App
 │   ├── app/
-│   │   ├── submit/page.tsx         ← Submission form
+│   │   ├── submit/page.tsx          ← Submission form
 │   │   ├── dashboard/
-│   │   │   ├── page.tsx            ← Dashboard with stats
-│   │   │   ├── loading.tsx         ← Skeleton fallback
-│   │   │   └── error.tsx           ← Error boundary
-│   │   ├── layout.tsx              ← Root layout + navbar
+│   │   │   ├── page.tsx             ← Dashboard with stats
+│   │   │   ├── loading.tsx          ← Skeleton fallback
+│   │   │   └── error.tsx            ← Error boundary
+│   │   ├── layout.tsx               ← Root layout + navbar
 │   │   └── globals.css
 │   ├── components/
-│   │   ├── RequestCard.tsx         ← Card with delete button
-│   │   ├── SkeletonCard.tsx        ← Loading placeholder
-│   │   ├── CategoryFilter.tsx      ← URL-reflected filter
-│   │   ├── AutoRefresh.tsx         ← Auto-polling component
-│   │   └── ErrorState.tsx          ← Error with retry
-│   └── lib/api.ts                  ← API helpers and types
+│   │   ├── RequestCard.tsx          ← Card with delete button
+│   │   ├── SkeletonCard.tsx         ← Loading placeholder
+│   │   ├── CategoryFilter.tsx       ← URL-reflected filter
+│   │   ├── AutoRefresh.tsx          ← Auto-polling component
+│   │   └── ErrorState.tsx           ← Error with retry
+│   ├── lib/api.ts                   ← API helpers and types
+│   └── .env.example
 │
-└── server/                         ← NestJS API
-└── src/
-├── requests/
-│   ├── requests.controller.ts
-│   ├── requests.service.ts
-│   ├── dto/create-request.dto.ts
-│   └── schemas/request.schema.ts
-├── ai/
-│   ├── ai.service.ts       ← OpenRouter integration
-│   └── ai.module.ts
-├── app.module.ts
-└── main.ts
+└── server/                          ← NestJS API
+    ├── src/
+    │   ├── requests/
+    │   │   ├── requests.controller.ts
+    │   │   ├── requests.service.ts
+    │   │   ├── dto/create-request.dto.ts
+    │   │   └── schemas/request.schema.ts
+    │   ├── ai/
+    │   │   ├── ai.service.ts        ← OpenRouter integration
+    │   │   └── ai.module.ts
+    │   ├── app.module.ts
+    │   └── main.ts
+    └── .env.example
 ```
 
 ## How It Works
@@ -111,17 +114,17 @@ npm install
 npm run dev               # runs on http://localhost:3000
 ```
 
-### Environment Variables
+## Environment Variables
 
-**server/.env**
+**server/.env.example**
 ```
-MONGODB_URI=mongodb+srv://...
-OPENROUTER_API_KEY=sk-or-...
+MONGODB_URI=mongodb+srv://username:password@cluster0.xxxxx.mongodb.net/ai-workflow-engine?appName=Cluster0
+OPENROUTER_API_KEY=sk-or-your-key-here
 CLIENT_URL=http://localhost:3000
 PORT=4000
 ```
 
-**client/.env.local**
+**client/.env.example**
 ```
 NEXT_PUBLIC_API_URL=http://localhost:4000
 ```
