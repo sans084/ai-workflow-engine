@@ -36,11 +36,12 @@ export default function CategoryFilter({ current }: { current: string }) {
         <button
           key={cat.value}
           onClick={() => setCategory(cat.value)}
-          className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
+          style={
             current === cat.value
-              ? 'bg-indigo-600 text-white'
-              : 'bg-white border border-gray-200 text-gray-600 hover:bg-gray-50'
-          }`}
+              ? { background: '#534AB7', color: '#EEEDFE', borderColor: '#534AB7' }
+              : { background: 'white', color: '#5F5E5A', borderColor: '#CECBF6' }
+          }
+          className="px-4 py-1.5 rounded-full text-sm font-medium border transition-colors"
         >
           {cat.label}
         </button>

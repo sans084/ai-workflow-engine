@@ -19,7 +19,7 @@ const FALLBACK: AiEnrichment = {
 export class AiService {
   private readonly logger = new Logger(AiService.name);
   private readonly apiUrl = 'https://openrouter.ai/api/v1/chat/completions';
-  private readonly model = 'meta-llama/llama-3.3-70b-instruct:free';
+  private readonly model = 'openrouter/auto';
 
   constructor(
     @InjectModel(RequestEntity.name)
