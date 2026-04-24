@@ -31,6 +31,7 @@ A full-stack AI-powered request intake and triage system built with Next.js 14, 
 | Deployment | Vercel (frontend) + Render (backend) |
 
 ## Project Structure
+```
 ai-workflow-engine/
 ├── client/                         ← Next.js 14 App
 │   ├── app/
@@ -61,6 +62,7 @@ ai-workflow-engine/
 │   └── ai.module.ts
 ├── app.module.ts
 └── main.ts
+```
 
 ## How It Works
 
