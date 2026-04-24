@@ -4,6 +4,7 @@ import RequestCard from '@/components/RequestCard';
 import SkeletonCard from '@/components/SkeletonCard';
 import CategoryFilter from '@/components/CategoryFilter';
 import ErrorState from '@/components/ErrorState';
+import AutoRefresh from '@/components/AutoRefresh';
 
 interface PageProps {
   searchParams: { category?: string; page?: string };
@@ -15,8 +16,8 @@ async function RequestsList({ category, page }: { category?: string; page?: stri
 
     const high = data.filter(r => r.urgency === 'high').length;
     const medium = data.filter(r => r.urgency === 'medium').length;
-    const low = data.filter(r => r.urgency === 'low').length;
     const enriched = data.filter(r => r.category !== null).length;
+    const hasUnenriched = data.some(r => r.category === null);
 
     if (data.length === 0) {
       return (
@@ -41,6 +42,9 @@ async function RequestsList({ category, page }: { category?: string; page?: stri
 
     return (
       <div>
+        {/* Auto-refresh while any card is still being enriched */}
+        {hasUnenriched && <AutoRefresh intervalMs={3000} />}
+
         <div className="grid grid-cols-4 gap-3 mb-6">
           {[
             { label: 'Total', value: meta.total, color: '#534AB7' },
@@ -54,6 +58,17 @@ async function RequestsList({ category, page }: { category?: string; page?: stri
             </div>
           ))}
         </div>
+
+        {hasUnenriched && (
+          <div className="flex items-center gap-2 mb-4 px-3 py-2 rounded-lg text-xs" style={{ background: '#EEEDFE', color: '#534AB7' }}>
+            <svg className="animate-spin h-3 w-3 shrink-0" fill="none" viewBox="0 0 24 24">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
+            </svg>
+            AI is analysing {data.filter(r => r.category === null).length} request{data.filter(r => r.category === null).length !== 1 ? 's' : ''}… page refreshes automatically
+          </div>
+        )}
+
         <p className="text-xs text-gray-400 mb-4">{meta.total} request{meta.total !== 1 ? 's' : ''} found</p>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {data.map((req) => (
